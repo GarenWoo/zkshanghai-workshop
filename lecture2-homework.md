@@ -73,8 +73,8 @@ component main  = IsZero ();
     } */
 ```
 - 此电路使用中间变量 inv 为 0 或 1/in。
--- 当 in = 0, inv = 0, out = 0 * 0 + 1 = 1
--- 当 in ≠ 0, inv = 1/in, out = -in * 1/in + 1 = -1 + 1 = 0
+    * 当 in = 0, inv = 0, out = 0 * 0 + 1 = 1
+    * 当 in ≠ 0, inv = 1/in, out = -in * 1/in + 1 = -1 + 1 = 0
 - 施加约束，使得 in 和 out 至少其中之一为 0 。
 
 ## 第 3 题: 相等 IsEqual
