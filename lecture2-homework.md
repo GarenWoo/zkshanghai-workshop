@@ -34,9 +34,48 @@ component main  = Num2Bits(5);
     "in": "11"
 } */
 ```
+- 此电路将十进制数转换为二进制数，即表达方式的改变。
+- nBits 为数组的元素个数，决定此数组所能代表的最大数。例如当 nBits 为 5 时，max = 11111(binary) = 2 ** 5 - 1= 31(decimal)。
+- b[i] * (1 - b[i])：对二进制数的任意一位施加约束，为 0 或 1 。
+- acc === in：保证 acc 与 in 两者的数值是一致的（仅是表达方式不同而已）。
 
 ## 第 2 题: 判零 IsZero
+- 参数：无
+- 输入信号：in
+- 输出信号：out
 
+要求：如果in为零，out应为1。 如果in不为零，out应为0。 这个有点棘手！
+
+
+我的答案：
+```
+pragma circom 2.1.4;
+
+include "circomlib/poseidon.circom";
+// include "https://github.com/0xPARC/circom-secp256k1/blob/master/circuits/bigint.circom";
+
+template IsZero () {
+    signal input in;
+    signal output out;
+
+    signal inv;
+
+    inv <-- in!=0 ? 1/in : 0;
+
+    out <== -in*inv +1;
+    in*out === 0;
+}
+
+component main  = IsZero ();
+
+/* INPUT = {
+    "in":"0"
+    } */
+```
+- 此电路使用中间变量 inv 为 0 或 1/in。
+-- 当 in = 0, inv = 0, out = 0 * 0 + 1 = 1
+-- 当 in ≠ 0, inv = 1/in, out = -in * 1/in + 1 = -1 + 1 = 0
+- 施加约束，使得 in 和 out 至少其中之一为 0 。
 
 ## 第 3 题: 相等 IsEqual
 
