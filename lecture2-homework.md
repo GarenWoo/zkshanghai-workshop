@@ -12,9 +12,6 @@
 ```
 pragma circom 2.1.4;
 
-include "circomlib/poseidon.circom";
-// include "https://github.com/0xPARC/circom-secp256k1/blob/master/circuits/bigint.circom";
-
 template Num2Bits (nBits) {
     signal input in;
     signal output b[nBits];
@@ -51,9 +48,6 @@ component main  = Num2Bits(5);
 ```
 pragma circom 2.1.4;
 
-include "circomlib/poseidon.circom";
-// include "https://github.com/0xPARC/circom-secp256k1/blob/master/circuits/bigint.circom";
-
 template IsZero () {
     signal input in;
     signal output out;
@@ -78,10 +72,96 @@ component main  = IsZero ();
 - 施加约束，使得 in 和 out 至少其中之一为 0 。
 
 ## 第 3 题: 相等 IsEqual
+- 参数：无
+- 输入信号：in[2]
+- 输出信号：out
 
+要求：如果 in[0] 等于 in[1]，则 out 应为 1。 否则，out 应该是 0。
+```
+pragma circom 2.1.4;
+
+template IsZero () {
+    signal input in;
+    signal output out;
+
+    signal inv;
+
+    inv <-- in!=0 ? 1/in : 0;
+
+    out <== -in*inv +1;
+    in*out === 0;
+}
+
+template IsEqual() {
+    signal input in[2];
+    signal output out;
+    component isZero = IsZero();
+    isZero.in <== in[0] - in[1];
+    isZero.out ==> out;
+}
+
+component main  = IsEqual ();
+
+/* INPUT = {
+    "in": ["3", "3"]
+} */
+```
 
 ## 第 4 题: 选择器 Selector
+- 参数：nChoices
+- 输入信号：in[nChoices], index
+- 输出信号：out
 
+要求：输出out应该等于in[index]。 如果 index 越界（不在 [0, nChoices) 中），out 应该是 0。
+```
+pragma circom 2.1.4;
+
+include "circomlib/poseidon.circom";
+
+template IsZero () {
+    signal input in;
+    signal output out;
+
+    signal inv;
+
+    inv <-- in!=0 ? 1/in : 0;
+
+    out <== -in*inv +1;
+    in*out === 0;
+}
+
+template IsEqual() {
+    signal input in[2];
+    signal output out;
+    component isZero = IsZero();
+    isZero.in <== in[0] - in[1];
+    isZero.out ==> out;
+}
+
+template Selector(nChoices) {
+    signal input in[nChoices];
+    signal input index;
+    signal output out;
+    signal sumUp[nChoices + 1];
+    sumUp[0] <== 0;
+    component isEqual[nChoices];
+ for (var i = 0; i < nChoices; i++) {
+    isEqual[i] = IsEqual();
+    isEqual[i].in[0] <== i;
+    isEqual[i].in[1] <== index;
+    sumUp[i] + isEqual[i].out * in[i] ==> sumUp[i + 1];
+}
+    out <== sumUp[nChoices];
+}
+
+component main  = Selector(5);
+
+
+/* INPUT = {
+    "in": ["1", "2", "3", "4", "5"],
+    "index": 4
+} */
+```
 
 ## 第 5 题: 判负 IsNegative
 
