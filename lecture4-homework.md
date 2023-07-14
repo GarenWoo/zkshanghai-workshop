@@ -43,4 +43,10 @@ npm i
 
 ### 合约编译
 `cd apps/contracts`
+
 `npm run compile`
+
+### 合约测试
+运行my-app中的测试用例：
+
+### 部署合约
