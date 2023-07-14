@@ -219,7 +219,7 @@ Step4: 接着我们时光倒流，回到和Verifier交互的第一步，发送$y
 
 Note：关于零知识这部分的证明在课程[ZKP MOOC Lecture 1: Introduction and History of ZKP](https://www.youtube.com/watch?v=uchjTIlPzFo&ab_channel=Blockchain-Web3MOOCs)中讲模拟器的部分有详细的说明，其模拟器过程为：
 
-<img src="lecture3/img/QRZK.png" width = "700" height = "350" alt="" align=center />
+<img src="IMG/3/QRZK.png" width = "800" height = "400" alt="" align=center />
 
 ## 双线性自映射意味着DDH的失效 Self-pairing implies failure of DDH
 
