@@ -29,7 +29,7 @@ Verkle 树 [1] 是一种使用向量承诺而不是哈希函数的 Merkle 树。
 
 a. 对于向量 $m =\left(m_{1}, ..., m_{q}\right)$，选择一组不同的点 $x_{1}, x_{2}, ..., x_{q}$，并将向量元素 $m_{i}$ 映射到点 $x_{i}$，得到一组点对 $\left(x_{i}, m_{i}\right)$。
 
-b. 使用这些点对构造一个插值多项式 $I(X)$，满足 $I\left(x_{i}\right)$ = $m_{i}$ 对于所有的 i。
+b. 使用这些点对构造一个插值多项式 $I(X)$，满足 $I\left(x_{i}\right)$ = $m_{i}$ (对于所有的 i)。
 
 c. 使用 $KZG$ 多项式承诺方案为插值多项式 $I(X)$ 生成承诺。
 
@@ -40,6 +40,11 @@ c. 使用 $KZG$ 多项式承诺方案为插值多项式 $I(X)$ 生成承诺。
 
 
 回答：
+a. 对于给定的点和评估 $\left(x_{i }, y_{i}\right)$，找到一个插值多项式 $I(X)$ ，满足 $I\left(x_{i}\right)=y_{i}$ 。
+
+b. 使用 $KZG$ 多项式承诺方案为插值多项式 $I(X)$ 生成承诺，并生成对应的证明 $\pi$ 。
+
+$\pi$ 就是多重证明，表明 $I\left(x_{i}\right)=y_{i}$ (对于所有的 i)。验证多重证明只需对每个 i 验证 $I\left(x_{i}\right)=y_{i}$。
 
 
 
@@ -65,5 +70,3 @@ The Verkle tree [1] is a Merkle tree that uses a vector commitment instead of a 
 
 - [1] J. Kuszmaul. Verkle trees. https://math.mit.edu/research/highschool/primes/materials/2018/Kuszmaul.pdf, 2019.
 
-
-## 我的答案
