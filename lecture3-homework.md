@@ -329,3 +329,7 @@ For more on BLS signature aggregation, see <https://crypto.stanford.edu/~dabo/pu
 答：验证算法始终能接受正确的签名。因为在$Verifiy(pk,m,\sigma)$这一步，等式左端$e(g_0,\sigma) = e(g_0, \alpha H(m))$，等式右端$e(pk,H(m)) = e(\alpha g_0, H(m))= e(g_0,\alpha H(m))$，等式两端相等，会始终通过算法验证。
 
 选择消息攻击下的存在性不可伪造性：攻击者想要伪造签名$\sigma \leftarrow \alpha H(m)$，首先在多项式时间计算出$\alpha$是困难的，因为知道公钥和生成员$g_0$在多项式时间内计算出私钥是离散对数困难问题。其次，攻击者想要任意选择消息$m$使得$H(m)$等于一个特定的值，这在多项式时间内也无法做到，因为哈希函数具有抗碰撞性，无法在多项式时间内找到一个$m$，使得$H(m)$等于一个事先给定的值。
+
+
+## Special Note
+Those answers to the assignments are entirely refered to those of wenjin1997 <https://github.com/wenjin1997/zkshanghai-workshop/blob/main/lecture3-homework.md> . 
