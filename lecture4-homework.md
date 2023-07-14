@@ -36,5 +36,11 @@ CLI 键入`semaphore create my-app --template monorepo-ethers`
 （其中 `--template` 后面接 3 种模板之一：contracts-hardhat / monorepo-ethers / monorepo-subgraph）
 
 安装依赖项：
-`cd my-app
-npm i`
+```
+cd my-app 
+npm i
+```
+
+### 合约编译
+`cd apps/contracts`
+`npm run compile`
